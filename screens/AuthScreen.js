@@ -1,24 +1,34 @@
-import React, { useState, useContext } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useState, useContext, useRef } from 'react';
+import { View, StyleSheet, KeyboardAvoidingView, Platform, TouchableOpacity, SafeAreaView, StatusBar, ScrollView } from 'react-native';
 import { TextInput, Button, Text, Title, Surface } from 'react-native-paper';
 import { AuthContext } from '../context/AuthContext';
+import LottieView from 'lottie-react-native';
 import { loginRoute, registerRoute } from '../utils/APIRoutes';
 import axios from 'axios';
 
 const AuthScreen = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [notification, setNotification] = useState(null);
+  const animation = useRef(null);
 
   const { login } = useContext(AuthContext);
 
   const handleAuth = async () => {
     try {
-      const route = isLogin ? loginRoute : registerRoute;
-      const data = isLogin ? { username: email, password } : { email, password, username };
-      const response = await axios.post(route, data);
-      login(response.data.user, response.data.token);
+      if (isLogin === 'register') {
+        const res = await axios.post(registerRoute, {
+          email, password, username
+        })
+        setNotification(res.data.msg)
+      } else {
+        const res = await axios.post(loginRoute, {
+          username: email, password
+        })
+        login(res.data.user, res.data.token)
+      }
     } catch (error) {
       console.error('Authentication error:', error);
     }
@@ -52,15 +62,15 @@ const AuthScreen = () => {
       >
         Login
       </Button>
-      <Text style={styles.switchText} onPress={() => setIsLogin(false)}>
-        Don't have an account? Register
-      </Text>
     </Surface>
   );
 
   const renderRegister = () => (
     <Surface style={styles.surface}>
       <Title style={styles.title}>Register</Title>
+      {notification ? (
+        <Text style={styles.text}>{notification}</Text>
+      ) : ''}
       <TextInput
         label="Username"
         value={username}
@@ -94,9 +104,6 @@ const AuthScreen = () => {
       >
         Register
       </Button>
-      <Text style={styles.switchText} onPress={() => setIsLogin(true)}>
-        Already have an account? Login
-      </Text>
     </Surface>
   );
 
@@ -105,9 +112,41 @@ const AuthScreen = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.container}
     >
-      <View style={styles.innerContainer}>
-        {isLogin ? renderLogin() : renderRegister()}
-      </View>
+      <ScrollView>
+        <SafeAreaView style={{flex: 1}}>
+          <StatusBar barStyle="light-content" backgroundColor="#000" />
+          <LottieView
+            autoPlay
+            loop={false}
+            ref={animation}
+            style={{
+              width: 200,
+              height: 200,
+              backgroundColor: 'transparent',
+              alignSelf: 'center'
+            }}
+            source={require('../assets/login.json')}
+          />
+          <View style={{flexDirection: 'row', justifyContent: 'space-around', }}>
+            <TouchableOpacity
+              style={[styles.tab, isLogin  === 'login' && styles.activeTab]}
+              onPress={() => setIsLogin('login')}
+              >
+              <Text style={styles.text}>LogIn</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.tab, isLogin  === 'register' && styles.activeTab]}
+              onPress={() => setIsLogin('register')}
+              >
+              <Text style={styles.text}>Create An Account</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.innerContainer}>
+            {isLogin === 'login' ? renderLogin() :
+              isLogin === 'register' ? renderRegister() : ''}
+          </View>
+        </SafeAreaView>
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 };
@@ -126,7 +165,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#131324',
   },
   innerContainer: {
-    flex: 1,
     justifyContent: 'center',
     padding: 20,
   },
@@ -152,7 +190,7 @@ const styles = StyleSheet.create({
     borderColor: '#7c3aed',
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderradius: 8,
+    borderRadius: 8,
     width: 'fill',
   },
   buttonText: {
@@ -165,6 +203,20 @@ const styles = StyleSheet.create({
     color: '#d8b4fe',
     textAlign: 'center',
     fontSize: 16,
+  },
+  tab: {
+    flex: 1,
+    alignItems: 'center',
+    paddingVertical: 5,
+    paddingHorizontal: 1,
+    borderRadius: 8
+  },
+  activeTab: {
+    backgroundColor: '#1e1e36',
+  },
+  text: {
+    color: '#ffffff',
+    padding: 5
   },
 });
 

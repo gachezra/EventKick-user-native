@@ -17,6 +17,7 @@ import { getForumThreadsRoute, addForumThreadRoute, deleteThreadRoute } from '..
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { FontAwesome } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Toaster, toast } from 'sonner-native';
 
 const ForumScreen = ({ route }) => {
@@ -123,19 +124,22 @@ const ForumScreen = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-        <StatusBar barStyle="light-content" backgroundColor="#131324" />
-        <KeyboardAvoidingView 
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.container}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
-        >
+      <StatusBar barStyle="light-content" backgroundColor="#131324" />
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
+      >
         <Text style={styles.forumTitle}>{eventTitle} Discussions</Text>
         <FlatList
           data={threads}
           keyExtractor={(item) => item._id}
           renderItem={renderThread}
         />
-        <View style={styles.newThreadContainer}>
+        <LinearGradient
+          // Button Linear Gradient
+          colors={['#1e1e36', '#131324']}
+          style={styles.newThreadContainer}>
           <TextInput
             style={styles.newThreadInput}
             placeholder="Start a new thread..."
@@ -146,7 +150,7 @@ const ForumScreen = ({ route }) => {
           <TouchableOpacity style={styles.newThreadButton} onPress={handleNewThread}>
             <Text style={styles.newThreadButtonText}>Post</Text>
           </TouchableOpacity>
-        </View>
+        </LinearGradient>
         <Toaster/>
       </KeyboardAvoidingView>
     </SafeAreaView>

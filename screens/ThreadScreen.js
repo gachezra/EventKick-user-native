@@ -319,11 +319,11 @@ const ThreadScreen = ({ route }) => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-        <KeyboardAvoidingView 
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.container}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
-        >
+      <KeyboardAvoidingView 
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 40}
+      >
         <StatusBar barStyle="light-content" backgroundColor="#131324" />
         <Text style={styles.threadTitle}>{thread.title}</Text>
         <FlatList
@@ -366,6 +366,7 @@ const styles = StyleSheet.create({
   },
   safeArea: {
     flex: 1,
+    backgroundColor: '#1e1e36',
   },
   loadingContainer: {
     flex: 1,

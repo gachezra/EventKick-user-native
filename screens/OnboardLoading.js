@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#131324',
-    paddingBottom: 10,
   },
   logo: {
     flex: 1,

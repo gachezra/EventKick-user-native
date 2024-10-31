@@ -1,16 +1,11 @@
 {
   "expo": {
-    "name": "eventkick-v2",
-    "slug": "eventkick",
+    "name": "EventKick",
+    "slug": "eventkick-user",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/event.svg",
+    "icon": "./assets/event.png",
     "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -19,8 +14,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/event.png",
+        "backgroundColor": "transparent"
       },
       "permissions": [
         "android.permission.CAMERA",
@@ -35,13 +30,6 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "react-native-vision-camera",
-        {
-          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
-          "microphonePermissionText": "$(PRODUCT_NAME) needs access to your Microphone."
-        }
-      ],
       [
         "expo-camera",
         {
@@ -61,7 +49,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "629b42e7-eabc-46c8-b348-344ae6b19a99"
+        "projectId": "ea145af0-a5f7-4997-abaa-a1985b45c18c"
       }
     },
     "owner": "gachezra"

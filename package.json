@@ -52,7 +52,6 @@
     "react-native-svg": "^15.2.0",
     "react-native-swiper": "^1.6.0",
     "react-native-video-thumbnail": "^1.0.1",
-    "react-native-vision-camera": "^4.5.3",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
     "sonner-native": "^0.15.0",
     "typescript": "~5.3.3"

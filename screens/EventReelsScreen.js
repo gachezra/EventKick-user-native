@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions, SafeAreaView, Text, Alert, Image } from 'react-native';
+import { View, FlatList, TouchableOpacity, StyleSheet, Dimensions, SafeAreaView, Text, Alert, Image, Platform } from 'react-native';
 import { Video } from 'expo-av';
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import * as MediaLibrary from 'expo-media-library';
@@ -200,15 +200,18 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   reelContainer: {
+    flex: 1,
     width: width,
-    height: height - 120,  // Use full screen height
+    height: Platform.OS === 'android' ? height - 55 : height - 132,
     borderRadius: 20,
     overflow: 'hidden',
-    marginVertical: 4
+    marginVertical: Platform.OS === 'ios' ? 10 : 10,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   media: {
-    width: '97%', // Fill the entire container
-    height: '100%', // Match parent height
+    width: '97%',
+    height: '100%',
     borderRadius: 20,
     alignSelf: 'center',
   },

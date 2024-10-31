@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { View, FlatList, Image, TouchableOpacity, StyleSheet, Dimensions, SafeAreaView, Text, Alert } from 'react-native';
+import { View, FlatList, Image, TouchableOpacity, StyleSheet, Dimensions, SafeAreaView, Text, Alert, Platform } from 'react-native';
 import { Video } from 'expo-av';
 import AWS from 'aws-sdk';
 import { Buffer } from 'buffer';
@@ -297,12 +297,13 @@ const styles = StyleSheet.create({
   },
   mediaContainer: {
     width: width - 20,
-    height: height - 150,
+    height: Platform.OS === 'ios' ? height - 140 : height - 70,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     overflow: 'hidden',
     marginHorizontal: 10,
+    marginTop: Platform === 'android' ? 10 : ''
   },
   media: {
     width: '100%',
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
   },
   bottomActions: {
     position: 'absolute',
-    bottom: 10,
+    bottom: Platform.OS === 'ios' ? 0 : 10,
     left: 20,
     right: 20,
     flexDirection: 'row',

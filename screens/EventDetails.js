@@ -18,6 +18,7 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AuthContext } from '../context/AuthContext';
 import ThreadCount from '../components/ThreadCount';
+import EventMediaCount from '../components/EventMediaCount';
 import { getCommentsRoute, addCommentRoute, registerEventRoute, deleteCommentRoute, getEventRoute } from '../utils/APIRoutes';
 import axios from 'axios';
 import BuyTicket from '../components/BuyTicket';
@@ -216,6 +217,7 @@ const EventDetails = ({ route }) => {
                 style={styles.eventImage} 
                 resizeMode="stretch" 
               />
+              <EventMediaCount   eventId={event._id} eventTitle={event.title} />
               {isRegistered ? (
                 <ThreadCount eventId={event._id} token={token} eventTitle={event.title}  />
               ) : (

@@ -12,7 +12,7 @@ import {
   Modal, 
   FlatList 
 } from 'react-native';
-import { CameraView, useCameraPermissions, useMicrophonePermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions } from 'expo-camera';
 import * as FileSystem from 'expo-file-system';
 import { Video } from 'expo-av';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
@@ -30,7 +30,6 @@ const CameraScreen = () => {
 
   // Permissions
   const [permission, requestPermission] = useCameraPermissions();
-  const [audioPermission, requestAudioPermission] = useMicrophonePermissions();
 
   // Camera state
   const [isActive, setIsActive] = useState(false);
@@ -138,38 +137,38 @@ const CameraScreen = () => {
     }
   };
 
-  const handleRecording = async () => {
-    if (!cameraRef.current || !selectedEvent) return;
+  // const handleRecording = async () => {
+  //   if (!cameraRef.current || !selectedEvent) return;
 
-    try {
-      if (isRecording) {
-        await cameraRef.current.stopRecording();
-        setIsRecording(false);
-      } else {
-        setIsRecording(true);
-        await cameraRef.current.recordAsync({
-          quality: '1080p',
-          maxDuration: 60,
-          mute: false
-        }).then(async (recordedVideo) => {
-          const fileName = `video_${Date.now()}.mp4`;
-          const newUri = `${FileSystem.documentDirectory}videos/${selectedEvent._id}/${fileName}`;
+  //   try {
+  //     if (isRecording) {
+  //       await cameraRef.current.stopRecording();
+  //       setIsRecording(false);
+  //     } else {
+  //       setIsRecording(true);
+  //       await cameraRef.current.recordAsync({
+  //         quality: '1080p',
+  //         maxDuration: 60,
+  //         mute: false
+  //       }).then(async (recordedVideo) => {
+  //         const fileName = `video_${Date.now()}.mp4`;
+  //         const newUri = `${FileSystem.documentDirectory}videos/${selectedEvent._id}/${fileName}`;
           
-          await FileSystem.moveAsync({
-            from: recordedVideo.uri,
-            to: newUri
-          });
+  //         await FileSystem.moveAsync({
+  //           from: recordedVideo.uri,
+  //           to: newUri
+  //         });
 
-          setVideo(newUri);
-          // console.log('Video saved:', newUri);
-        });
-      }
-    } catch (error) {
-      console.error('Video recording failed:', error);
-      setIsRecording(false);
-      Alert.alert('Error', 'Failed to record video');
-    }
-  };
+  //         setVideo(newUri);
+  //         // console.log('Video saved:', newUri);
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Video recording failed:', error);
+  //     setIsRecording(false);
+  //     Alert.alert('Error', 'Failed to record video');
+  //   }
+  // };
 
   // ============= Effects & Handlers =============
   useEffect(() => {
@@ -193,7 +192,7 @@ const CameraScreen = () => {
   });
 
   // Permission check
-  if (!permission || !audioPermission) {
+  if (!permission) {
     return (
       <View style={styles.container}>
         <Text style={styles.message}>Camera and microphone access needed</Text>
@@ -201,7 +200,6 @@ const CameraScreen = () => {
           title="Grant permissions" 
           onPress={() => {
             requestPermission();
-            requestAudioPermission();
           }} 
         />
       </View>
@@ -225,7 +223,7 @@ const CameraScreen = () => {
     <View style={styles.container}>
       {isActive && (
         <CameraView
-          mode="video"
+          mode='photo'
           style={styles.camera}
           facing={facing}
           flash={flash}
@@ -265,10 +263,9 @@ const CameraScreen = () => {
       </View>
 
       {/* Capture Button */}
-      <Pressable
-        onPress={isRecording ? handleRecording : takePicture}
-        onLongPress={handleRecording}
-        style={[styles.captureButton, isRecording && styles.recordingButton]}
+      <TouchableOpacity
+        onPress={takePicture}
+        style={styles.captureButton}
       />
 
       {/* Event Selection Modal */}
