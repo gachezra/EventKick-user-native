@@ -114,7 +114,7 @@ const AuthScreen = () => {
     >
       <ScrollView>
         <SafeAreaView style={{flex: 1}}>
-          <StatusBar barStyle="light-content" backgroundColor="#000" />
+          <StatusBar barStyle="light-content" backgroundColor="#131324" />
           <LottieView
             autoPlay
             loop={false}

@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View, Alert } from 'react-native';
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext, useRef, SafeAreaView, StatusBar } from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 import { AuthContext } from '../context/AuthContext';
 import LottieView from 'lottie-react-native';
@@ -127,7 +127,8 @@ const OnboardLoading = ({ navigation }) => {
   }, [progressValue, token, navigation]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#131324" />
       <View style={styles.logo}>
         <Text style={styles.logoText}>EventKick</Text>
         <LottieView
@@ -155,7 +156,7 @@ const OnboardLoading = ({ navigation }) => {
           color={'rgba(255, 255, 255, 0.5)'}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
