@@ -515,12 +515,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  avatar: {
-    borderRadius: 50,
-    marginRight: 10,
-    borderWidth: 2,
-    borderColor: '#4F46E5',
-  },
 });
 
 export default ThreadScreen;

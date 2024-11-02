@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   albumCover: {
-    width: '100%',
+    width: albumSize,
     height: albumSize,
     borderRadius: 10,
     marginBottom: 8,
@@ -333,12 +333,6 @@ const styles = StyleSheet.create({
   },
   iconButton: {
     padding: 5,
-  },
-  albumCover: {
-    width: albumSize,
-    height: albumSize,
-    borderRadius: 10,
-    marginBottom: 8,
   },
   emptyAlbum: {
     backgroundColor: '#222',

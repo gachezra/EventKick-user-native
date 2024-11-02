@@ -1,5 +1,5 @@
-import { Text, StyleSheet, View, Alert } from 'react-native';
-import React, { useEffect, useState, useContext, useRef, SafeAreaView, StatusBar } from 'react';
+import { Text, StyleSheet, View, Alert, SafeAreaView, StatusBar } from 'react-native';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import ProgressBar from 'react-native-progress/Bar';
 import { AuthContext } from '../context/AuthContext';
 import LottieView from 'lottie-react-native';
@@ -128,8 +128,8 @@ const OnboardLoading = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#131324" />
       <View style={styles.logo}>
+        <StatusBar barStyle="light-content" backgroundColor="#131324" />
         <Text style={styles.logoText}>EventKick</Text>
         <LottieView
           autoPlay
