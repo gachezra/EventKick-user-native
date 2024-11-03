@@ -177,7 +177,7 @@ const ThreadScreen = ({ route }) => {
           <View style={styles.replyBorder} />
             <View style={styles.postHeader}>
               <View style={styles.avatar}>
-                <SvgXml xml={atob(item.user.avatarImage)} width="40" height="40" />
+                <SvgXml xml={atob(item.user.avatarImage)} width="50" height="50" />
               </View>
               <Text style={styles.postUser}>{item.user.username}</Text>
             </View>
@@ -454,8 +454,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   avatar: {
-    width: 40,
-    height: 40,
+    width: 55,
+    height: 55,
     borderRadius: 20,
     marginRight: 10,
     borderWidth: 2,
