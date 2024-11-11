@@ -15,7 +15,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/event.png",
-        "backgroundColor": "transparent"
+        "backgroundColor": "#00000000"
       },
       "permissions": [
         "android.permission.CAMERA",

@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+#tests
+/test_suite_analysis
+
 # Expo
 .expo/
 dist/

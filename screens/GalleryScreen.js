@@ -303,7 +303,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     overflow: 'hidden',
     marginHorizontal: 10,
-    marginTop: Platform === 'android' ? 10 : ''
   },
   media: {
     width: '100%',
