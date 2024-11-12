@@ -51,8 +51,8 @@ const CameraScreen = () => {
   const createEventDirectories = async (eventId) => {
     try {
       // Define directory paths
-      const photoDir = `${FileSystem.documentDirectory}photos/${eventId}`;
-      const videoDir = `${FileSystem.documentDirectory}videos/${eventId}`;
+      const photoDir = `${FileSystem.documentDirectory}photos/u/${eventId}`;
+      const videoDir = `${FileSystem.documentDirectory}videos/u/${eventId}`;
 
       // Check if directories exist
       const [photoDirExists, videoDirExists] = await Promise.all([

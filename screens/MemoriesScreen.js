@@ -82,8 +82,8 @@ export default function MemoriesScreen({ navigation }) {
     for (const event of events) {
       if (event._id === 'all') continue; // Skip the "All Events" item
   
-      const photoDir = `${FileSystem.documentDirectory}photos/${event._id}`;
-      const videoDir = `${FileSystem.documentDirectory}videos/${event._id}`;
+      const photoDir = `${FileSystem.documentDirectory}photos/u/${event._id}`;
+      const videoDir = `${FileSystem.documentDirectory}videos/u/${event._id}`;
   
       const photoFiles = await getFilesRecursively(photoDir).catch(() => []);
       const videoFiles = await getFilesRecursively(videoDir).catch(() => []);
