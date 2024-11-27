@@ -162,6 +162,9 @@ const EventsScreen = ({ navigation }) => {
         </View>
       ) : (
         <View style={styles.eventsContainer}>
+          <TouchableOpacity onPress={() => navigation.navigate('Maps')}>
+            <Text style={{fontSize: 16, color: 'white'}}>Maps</Text>
+          </TouchableOpacity>
           <Text style={styles.eventsTitle}>
             Events for {selectedDate || today}
           </Text>

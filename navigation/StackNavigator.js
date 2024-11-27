@@ -12,6 +12,7 @@ import GalleryScreen from '../screens/GalleryScreen';
 import EventMediaScreen from '../screens/EventMediaScreen';
 import EventReelsScreen from '../screens/EventReelsScreen';
 import { AuthContext } from '../context/AuthContext';
+import MapsView from '../screens/MapScreen';
 import TabNavigator from './TabNavigator';
 
 const Stack = createNativeStackNavigator();
@@ -33,6 +34,7 @@ const StackNavigator = () => {
           <Stack.Screen name="Tickets" component={TicketScreen} options={{ headerShown: false }} />
           <Stack.Screen name="EditProfile" component={EditProfileScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Pics" component={GalleryScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Maps" component={MapsView} options={{headerShown: false}} />
           <Stack.Screen name="Reels" component={EventReelsScreen} options={{ headerShown: false }} />
         </>
       ) : (
